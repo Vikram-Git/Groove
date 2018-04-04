@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+All Artists
+{% endblock %}
+
+{% block body %}
+<div class="container artist-container">
+
+    <div class="card mt-4">
+        <div class="card-header text-center">
+            {% include 'music/index-menu.html' with active='artists' %}
+        </div>
+
+        <div class="card-body">
+            {% if all_artists %}
+                <div class="row">
+                    {% for artist in all_artists %}
+                        <div class="card text-center col-sm-12 col-md-2 px-1 py-1">
+                            <a href="{% url 'music:song-list' artist.pk %}">
+                                <img class="card-img-top" src="{{ artist.image.url }}" height="200px" alt="Artist Image">
+                            </a>
+                            <div class="card-block mt-1">
+                                <h5 class="card-title">&nbsp;{{ artist.name }}</h5>
+                                <!--<a href="{% url 'music:song-list' artist.pk %}" class="btn btn-primary" role="button">
+                                    <i class="fa fa-music" aria-hidden="true"></i>
+                                </a>-->
+
+                                <a href="{% url 'music:edit-artist' artist.pk %}" class="btn btn-light" role="button">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+
+                                <a href="{% url 'music:fav-artist' artist.pk %}" class="btn btn-light btn-fav" role="button">
+                                    <i class="fa fa-star {% if artist.is_fav %}favourite{% endif %}" aria-hidden="true"></i>
+                                </a>
+
+                                <a href="{% url 'music:delete-artist' artist.pk %}" class="btn btn-light " role="button">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning text-center" role="alert">
+                     You have not created any artists, get started by creating one.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

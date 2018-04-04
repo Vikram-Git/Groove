@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Profile
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="page-header" style="margin-top: 1em">
+        <h1>Account Settings</h1>
+    </div>
+    <div class="row" style="margin-top: 2em; border-top: 1px solid grey; padding-top: 2em">
+        <div class="col-md-3">
+            {% include 'accounts/settings-menu.html' with active='profile'  %}
+        </div>
+
+        <div class="col-md-9">
+
+        {% include "messages.html" %}
+
+        <form method="post" action="">
+        {% csrf_token %}
+        {% for field in form1 %}
+            <div class="form-group row">
+                <label for="{{ field.label }}" class="col-form-label col-sm-3">{{ field.label }}</label>
+                <div class=" col-sm-9">
+                    {{ field }}
+                    {% if field.help_text %}
+                        <span class="help-block">{{ field.help_text }}</span>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <label class="control-label">{{ error }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for field in form2 %}
+            <div class="form-group row">
+                <label for="{{ field.label }}" class="col-form-label col-sm-3">{{ field.label }}</label>
+                <div class=" col-sm-9">
+                    {{ field }}
+                    {% if field.help_text %}
+                    <span class="help-block">{{ field.help_text }}</span>
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <label class="control-label">{{ error }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <div class="offset-sm-3 col-sm-9">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Logout
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="alert alert-success text-center mt-4" role="alert">
+        You have successfully logged out, <a href="{% url 'accounts:login' %}">login</a> again.
+    </div>
+</div>
+{% endblock %}

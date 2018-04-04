@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta charset="UTF-8">
+    <title>Groove - {% block title %}{% endblock %}</title>
+
+    {% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="{% static 'music/js/script.js' %}"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+		<a class="nav-link text-white ml-3 mr-3" href="{% url 'accounts:home' %}">GROOVE</a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsednavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="collapsednavbar">
+		{% if user.is_authenticated %}
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item mx-2">
+				<a class="nav-link" href="{% url 'music:index' %}">
+					<i class="fa fa-music" aria-hidden="true"></i>&nbsp;Music
+				</a>
+			</li>
+		</ul>
+		<!--| url 'music:all-songs'-->
+		<form action="{% url 'music:search' %}" method="get" class="form-inline mr-5">
+			<input type="text" class="form-control form-control-sm mr-1" name="q" value="{{ request.GET.q }}">
+			<button class="btn btn-default btn-sm" type="submit">Search</button>
+		</form>
+
+		<ul class="navbar-nav mr-3">
+			<li class="nav-item dropdown">
+				<a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">{{ request.user.username }}</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<a class="dropdown-item" href="{% url 'accounts:edit-profile' %}">
+						<i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Settings
+					</a>
+					<a class="dropdown-item" href="{% url 'accounts:about-groove' %}">
+						<i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;About
+					</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="{% url 'accounts:logout' %}">
+						<i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Logout
+					</a>
+				</div>
+			</li>
+		</ul>
+		{% else %}
+			<ul class="navbar-nav ml-auto">
+			<li class="nav-item mx-2">
+				<a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+			</li>
+			<li class="nav-item mx-2">
+				<a class="nav-link" href="{% url 'accounts:register' %}">
+					<i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Register
+				</a>
+			</li>
+			</ul>
+		{% endif %}
+		</div>
+	</nav>
+
+
+	{% block body %}
+	{% endblock %}
+
+
+</body>
+</html>

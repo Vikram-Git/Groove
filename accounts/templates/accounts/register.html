@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            <div class="page-header" style="margin-top: 1em">
+                <h1>Create Account</h1>
+            </div>
+            <div style="margin-top: 2em; border-top: 1px solid grey; padding-top: 2em">
+            <form action="#" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group row">
+                    <label for="{{ field.label }}" class="col-sm-3 col-form-label">{{ field.label_tag }}</label>
+                    <div class="col-sm-9">
+                        {{ field }}
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="form-group row">
+                    <div class="offset-sm-3 col-sm-9">
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

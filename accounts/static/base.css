@@ -1,0 +1,30 @@
+.body{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    max-width: 90%;
+}
+
+.page-header {
+  margin: 0;
+  padding: 0;
+}
+
+.page-header h1 {
+  margin: 0;
+  padding: 0;
+  font-weight: 100;
+  font-size: 1.5em;
+}
+
+form{
+  margin:0;
+  padding:0;
+}
+
+.favourite{
+  color: #ffd700;
+}
+

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+All Songs
+{% endblock %}
+
+{% block body %}
+
+<div class="container song-container">
+
+    <div class="card mt-4">
+        <div class="card-header text-center">
+            {% include 'music/index-menu.html' with active='songs' %}
+        </div>
+
+        <div class="card-body">
+            {% if user_songs %}
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table text-center">
+                            <thead class="text-center">
+                            <tr>
+                                <th>Song Title</th>
+                                <th>Activity</th>
+                                <th>Artist</th>
+                                <th>Album</th>
+                                <th>Favorite</th>
+                                <th>Remove</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for song in user_songs %}
+                                <tr>
+                                    <td>{{ song.song_title }}</td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm" role="button" href="{{ song.audio_file.url }}">
+                                            <i class="fa fa-play" aria-hidden="true"></i>&nbsp;Play
+                                        </a>
+                                    </td>
+                                    <td>{{ song.artist }}</td>
+                                    <td>{{ song.album_name }}</td>
+                                    <td>
+                                        <a href="{% url 'music:fav-song' song.pk %}" class="btn btn-light btn-fav" role="button">
+                                            <i class="fa fa-star {% if song.is_fav %}favourite{% endif %}" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'music:delete-song' song.pk %}" class="btn btn-light btn-delete" role="button">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning text-center" role="alert">
+                     You do not have any songs.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

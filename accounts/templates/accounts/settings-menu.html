@@ -1,0 +1,11 @@
+<div class="list-group">
+    <a href="{% url 'accounts:edit-profile' %}" class="list-group-item {% if active == 'profile' %}active{% endif %}">
+        Profile
+    </a>
+    <a href="{% url 'accounts:edit-picture' %}" class="list-group-item {% if active == 'picture' %}active{% endif %}">
+        Picture
+    </a>
+    <a href="{% url 'accounts:edit-password' %}" class="list-group-item {% if active == 'password' %}active{% endif %}">
+        Password
+    </a>
+</div>

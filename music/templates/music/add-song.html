@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ this_artist.name }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-3">
+            <div class="card text-center px-1 py-1">
+                <img class="card-img-top" src="{{ this_artist.image.url }}" height="300px" alt="Artist Image">
+                <div class="card-block">
+                    <h3 class="card-title">{{ this_artist.name }}</h3>
+                    <a href="{% url 'music:edit-artist' this_artist.pk %}" class="btn btn-light" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{% url 'music:delete-artist' this_artist.pk %}" class="btn btn-light" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'music:song-list' this_artist.pk %}">All Songs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="{% url 'music:add-song' this_artist.pk %}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;New Song</a>
+                </li>
+            </ul>
+
+            <div class="page-header my-4">
+                <h3>Add Songs</h3>
+            </div>
+
+            <form action="#" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group row">
+                    <label for="{{ field.label }}" class="col-sm-3 col-form-label">{{ field.label_tag }}</label>
+                    <div class="col-sm-7">
+                        {{ field }}
+                        <!--{% for errors in field.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ errors }}
+                            </div>
+                        {% endfor %}-->
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger" role="alert">{{ errors }} </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="form-group row">
+                    <div class="offset-sm-3 col-sm-9">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

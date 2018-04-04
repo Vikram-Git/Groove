@@ -1,0 +1,17 @@
+<ul class="nav nav-pills card-header-pills">
+    <li class="nav-item col-md-2">
+        <a href="{% url 'music:index' %}" class="nav-link {% if active == 'artists' %}active{% endif %}">
+            Artists
+        </a>
+    </li>
+    <li class="nav-item col-md-2">
+        <a href="{% url 'music:all-songs' %}" class="nav-link {% if active == 'songs' %}active{% endif %}">
+            Songs
+        </a>
+    </li>
+    <li class="nav-item col-md-2">
+        <a href="{% url 'music:create-artist' %}" class="nav-link {% if active == 'add-artists' %}active{% endif %}">
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Artists
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ this_artist.name }}
+{% endblock %}
+
+{% block body %}
+<div class="container song-container">
+    <div class="row mt-3">
+        <div class="col-md-3">
+            <div class="card text-center px-1 py-1">
+                <img class="card-img-top" src="{{ this_artist.image.url }}" height="300px" alt="Artist Image">
+                <div class="card-block">
+                    <h3 class="card-title">{{ this_artist.name }}</h3>
+                    <a href="{% url 'music:edit-artist' this_artist.pk %}" class="btn btn-light" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{% url 'music:delete-artist' this_artist.pk %}" class="btn btn-light" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" href="{% url 'music:song-list' this_artist.pk %}">All Songs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'music:add-song' this_artist.pk %}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;New Song</a>
+                </li>
+            </ul>
+
+            <div class="card mt-4">
+                <div class="card-block">
+                    <div class="table-responsive">
+                        <table class="table text-center">
+                            <thead>
+                            <tr>
+                                <th>Song Title</th>
+                                <th>Activity</th>
+                                <th>Album Name</th>
+                                <th>Favorite</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for song in this_artist.song_set.all %}
+                            <tr>
+                                <td>{{ song.song_title }}</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" role="button" href="{{ song.audio_file.url }}">
+                                        <i class="fa fa-play" aria-hidden="true"></i>&nbsp;Play
+                                    </a>
+                                </td>
+                                <td>{{ song.album_name }}</td>
+                                <td>
+                                    <a href="{% url 'music:fav-song' song.pk %}" class="btn btn-light btn-fav" role="button">
+                                        <i class="fa fa-star {% if song.is_fav %}favourite{% endif %}" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'music:delete-song' song.pk %}" class="btn btn-light btn-delete" role="button">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
