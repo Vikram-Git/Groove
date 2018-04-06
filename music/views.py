@@ -111,6 +111,17 @@ def all_song_list(request):
     return render(request, 'music/all-songs.html', {'user_songs': user_songs})
 
 
+def favourites(request):
+    user_artists = Artist.objects.filter(user=request.user)
+    user_fav_songs_pk = []
+    for artist in user_artists:
+        for song in artist.song_set.all():
+            if song.is_fav:
+                user_fav_songs_pk.append(song.pk)
+    fav_songs = Song.objects.filter(pk__in=user_fav_songs_pk)
+    return render(request, 'music/favourites.html', {'fav_songs': fav_songs})
+
+
 def search(request):
     all_artists = Artist.objects.filter(user=request.user)
     user_songs_pk = []

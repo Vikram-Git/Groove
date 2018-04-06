@@ -10,8 +10,13 @@
         </a>
     </li>
     <li class="nav-item col-md-2">
+        <a href="{% url 'music:favourites' %}" class="nav-link {% if active == 'favourites' %}active{% endif %}">
+            Favourites
+        </a>
+    </li>
+    <li class="nav-item col-md-2">
         <a href="{% url 'music:create-artist' %}" class="nav-link {% if active == 'add-artists' %}active{% endif %}">
-            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Artists
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Artist
         </a>
     </li>
 </ul>

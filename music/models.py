@@ -14,7 +14,7 @@ class Artist(models.Model):
 
 class Song(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    album_name = models.CharField(max_length=100, blank=True, null=True)
+    album_name = models.CharField(max_length=100, default='---', blank=True, null=True)
     song_title = models.CharField(max_length=100)
     audio_file = models.FileField(upload_to='song-files/')
     is_fav = models.BooleanField(default=False)

@@ -43,7 +43,7 @@ All Artists
                 </div>
             {% else %}
                 <div class="alert alert-warning text-center" role="alert">
-                     You have not created any artists, get started by creating one.
+                    You have not added any artist, get started by <a href="{% url 'music:create-artist' %}">adding one</a>.
                 </div>
             {% endif %}
         </div>

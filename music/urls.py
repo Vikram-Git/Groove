@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^delete-song/(?P<song_pk>((\d)+))/$', views.delete_song, name='delete-song'),
     url(r'^fav-song/(?P<song_pk>((\d)+))$', views.fav_song, name='fav-song'),
     url(r'^all-songs/$', views.all_song_list, name='all-songs'),
+    url(r'^favourites/$', views.favourites, name='favourites'),
     url(r'^search/$', views.search, name="search"),
 ]
