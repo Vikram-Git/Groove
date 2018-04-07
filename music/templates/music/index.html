@@ -14,37 +14,38 @@ All Artists
 
         <div class="card-body">
             {% if all_artists %}
-                <div class="row">
-                    {% for artist in all_artists %}
-                        <div class="card text-center col-sm-12 col-md-2 px-1 py-1">
-                            <a href="{% url 'music:song-list' artist.pk %}">
-                                <img class="card-img-top" src="{{ artist.image.url }}" height="200px" alt="Artist Image">
-                            </a>
-                            <div class="card-block mt-1">
-                                <h5 class="card-title">&nbsp;{{ artist.name }}</h5>
-                                <!--<a href="{% url 'music:song-list' artist.pk %}" class="btn btn-primary" role="button">
-                                    <i class="fa fa-music" aria-hidden="true"></i>
-                                </a>-->
+            <div class="row">
+                {% for artist in all_artists %}
+                <div class="card text-center col-sm-12 col-md-2 px-1 py-1">
+                    <a href="{% url 'music:song-list' artist.pk %}">
+                        <img class="card-img-top" src="{{ artist.image.url }}" height="200px" alt="Artist Image">
+                    </a>
+                    <div class="card-block mt-1">
+                        <h5 class="card-title">{{ artist.name }}</h5>
+                        <!--<a href="{% url 'music:song-list' artist.pk %}" class="btn btn-primary" role="button">
+                            <i class="fa fa-music" aria-hidden="true"></i>
+                        </a>-->
 
-                                <a href="{% url 'music:edit-artist' artist.pk %}" class="btn btn-light" role="button">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </a>
+                        <a href="{% url 'music:edit-artist' artist.pk %}" class="btn btn-light" role="button">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
 
-                                <a href="{% url 'music:fav-artist' artist.pk %}" class="btn btn-light btn-fav" role="button">
-                                    <i class="fa fa-star {% if artist.is_fav %}favourite{% endif %}" aria-hidden="true"></i>
-                                </a>
+                        <a href="{% url 'music:fav-artist' artist.pk %}" class="btn btn-light btn-fav" role="button">
+                            <i class="fa fa-star {% if artist.is_fav %}favourite{% endif %}" aria-hidden="true"></i>
+                        </a>
 
-                                <a href="{% url 'music:delete-artist' artist.pk %}" class="btn btn-light " role="button">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
+                        <a href="{% url 'music:delete-artist' artist.pk %}" class="btn btn-light " role="button">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
+                {% endfor %}
+            </div>
             {% else %}
-                <div class="alert alert-warning text-center" role="alert">
-                    You have not added any artist, get started by <a href="{% url 'music:create-artist' %}">adding one</a>.
-                </div>
+            <div class="alert alert-warning text-center" role="alert">
+                You have not added any artist, get started by <a href="{% url 'music:create-artist' %}">
+                adding one</a>.
+            </div>
             {% endif %}
         </div>
     </div>

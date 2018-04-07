@@ -15,39 +15,39 @@ All Songs
 
         <div class="card-body">
             {% if fav_songs %}
-                <div class="row">
-                    <div class="table-responsive">
-                        <table class="table text-center">
-                            <thead class="text-center">
-                            <tr>
-                                <th>Song Title</th>
-                                <th>Activity</th>
-                                <th>Artist</th>
-                                <th>Album</th>
-                            </tr>
-                            </thead>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table text-center">
+                        <thead class="text-center">
+                        <tr>
+                            <th>Song Title</th>
+                            <th>Activity</th>
+                            <th>Artist</th>
+                            <th>Album</th>
+                        </tr>
+                        </thead>
 
-                            <tbody>
-                                {% for song in fav_songs %}
-                                <tr>
-                                    <td>{{ song.song_title }}</td>
-                                    <td>
-                                        <a class="btn btn-success btn-sm" role="button" href="{{ song.audio_file.url }}">
-                                            <i class="fa fa-play" aria-hidden="true"></i>&nbsp;Play
-                                        </a>
-                                    </td>
-                                    <td>{{ song.artist }}</td>
-                                    <td>{{ song.album_name }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                        <tbody>
+                            {% for song in fav_songs %}
+                            <tr>
+                                <td>{{ song.song_title }}</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" role="button" href="{{ song.audio_file.url }}">
+                                        <i class="fa fa-play" aria-hidden="true"></i>&nbsp;Play
+                                    </a>
+                                </td>
+                                <td>{{ song.artist }}</td>
+                                <td>{{ song.album_name }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
+            </div>
             {% else %}
-                <div class="alert alert-warning text-center" role="alert">
-                     You have not added any songs to favourites.
-                </div>
+            <div class="alert alert-warning text-center" role="alert">
+                 You have not added any songs to favourites.
+            </div>
             {% endif %}
         </div>
     </div>
